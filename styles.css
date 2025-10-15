@@ -94,6 +94,8 @@ html, body { height: 100%; font-family: 'Inter', system-ui, -apple-system, 'Sego
     width: 44px;
     pointer-events: none;
     z-index: 3;
+    opacity: 1;
+    transition: opacity 200ms ease;
   }
   /* left fade (matches sidebar background tones) */
   .sidebar::before{
@@ -105,6 +107,17 @@ html, body { height: 100%; font-family: 'Inter', system-ui, -apple-system, 'Sego
     right: 0;
     background: linear-gradient(270deg, rgba(255,250,240,0.98), rgba(255,250,240,0));
   }
+  /* hide fades via classes toggled by JS when scroller is at either edge */
+  .sidebar.hide-left::before{ opacity: 0; }
+  .sidebar.hide-right::after{ opacity: 0; }
+  /* when both hidden, fully transparent */
+  .sidebar.hide-left.hide-right::before,
+  .sidebar.hide-left.hide-right::after{ opacity: 0; }
+
+  /* scroll-snap for nicer touch snapping */
+  .sidebar nav{ overflow-x:auto; -webkit-overflow-scrolling:touch; scroll-snap-type: x mandatory; }
+  .sidebar nav ul{ display:flex; flex-direction:row; gap:8px; padding:6px; }
+  .sidebar nav ul li{ flex: 0 0 auto; scroll-snap-align: start; }
   .content{ order:1; padding:12px }
   .panel{ width:100%; }
   .banner { min-height:220px; }

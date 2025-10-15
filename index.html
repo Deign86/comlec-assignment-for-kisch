@@ -281,5 +281,31 @@
       });
     })();
   </script>
+  <script>
+    // Toggle left/right fades on the sidebar based on the nav scroller position
+    (function(){
+      const sidebar = document.querySelector('.sidebar');
+      const nav = sidebar && sidebar.querySelector('nav');
+      if(!sidebar || !nav) return;
+
+      function updateFades(){
+        // determine if scroller is at left or right edge
+        const scrollLeft = nav.scrollLeft;
+        const maxScroll = nav.scrollWidth - nav.clientWidth;
+        // use small epsilon to account for fractional pixels
+        const eps = 1;
+        if(scrollLeft <= eps) sidebar.classList.add('hide-left'); else sidebar.classList.remove('hide-left');
+        if(scrollLeft >= maxScroll - eps) sidebar.classList.add('hide-right'); else sidebar.classList.remove('hide-right');
+      }
+
+      // initial update and events
+      updateFades();
+      nav.addEventListener('scroll', updateFades, { passive: true });
+      window.addEventListener('resize', updateFades);
+      // when navigation items change (rare here), re-evaluate
+      const observer = new MutationObserver(() => updateFades());
+      observer.observe(nav, { childList:true, subtree:true });
+    })();
+  </script>
   </body>
 </html>
