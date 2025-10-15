@@ -1,0 +1,12 @@
+{
+  "name": "school-site-resize",
+  "version": "1.0.0",
+  "description": "Resize images for responsive srcsets",
+  "main": "resize-images.js",
+  "scripts": {
+    "resize": "node resize-images.js"
+  },
+  "dependencies": {
+    "sharp": "^0.32.0"
+  }
+}
