@@ -44,7 +44,9 @@ html, body { height: 100%; font-family: 'Inter', system-ui, -apple-system, 'Sego
 .saint-img{ display:block; max-width:80%; height:auto; margin: 12px auto 18px auto; border-radius:28px; box-shadow:0 6px 12px rgba(110,63,5,0.06); border:4px solid rgba(255,238,197,0.8); }
 
 .video-frame{ max-width:880px; margin: 8px auto 18px auto; padding:12px; background: linear-gradient(180deg, rgba(255,250,240,0.95), rgba(255,244,227,0.95)); border-radius:18px; box-shadow: 0 10px 24px rgba(110,63,5,0.09); border:6px solid rgba(255,238,197,0.9); display:flex; justify-content:center; }
-.member-video{ width:100%; height:auto; border-radius:12px; background:#000; display:block; }
+
+.youtube-wrapper{ width:100%; max-width:880px; position:relative; padding-top:56.25%; /* 16:9 aspect ratio */ }
+.youtube-wrapper iframe{ position:absolute; top:0; left:0; width:100% !important; height:100% !important; border:0; border-radius:12px; }
 
 @media (max-width:640px){
   .saint-img{ max-width:96%; border-radius:18px; border-width:3px; }
