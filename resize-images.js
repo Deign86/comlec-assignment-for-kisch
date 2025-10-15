@@ -2,16 +2,16 @@ const sharp = require('sharp');
 const fs = require('fs');
 const path = require('path');
 
-const srcDir = __dirname;
-const outDir = path.join(__dirname, 'img');
+const srcDir = path.join(__dirname, 'img');
+const outDir = path.join(__dirname, 'optimized_img');
 const sizes = [320, 600, 900];
 const bannerSizes = [900, 1400, 2000];
 
-if (!fs.existsSync(outDir)) fs.mkdirSync(outDir);
+if (!fs.existsSync(outDir)) fs.mkdirSync(outDir, { recursive: true });
 
 const files = fs.readdirSync(srcDir).filter(f => {
   const lower = f.toLowerCase();
-  return lower.endsWith('.jpg') && !lower.startsWith('img' ) && !lower.includes('-320') && !lower.includes('-600') && !lower.includes('-900') && f !== 'banner.jpg';
+  return lower.endsWith('.jpg') && !lower.startsWith('img') && !lower.includes('-320') && !lower.includes('-600') && !lower.includes('-900') && f !== 'banner.jpg';
 });
 
 (async () => {

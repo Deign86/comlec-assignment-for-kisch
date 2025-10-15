@@ -187,7 +187,6 @@
           <div id="members-portal" class="panel" style="display:none;">
             <div class="video-frame">
               <div class="youtube-wrapper">
-                <!-- iframe src is set dynamically when panel opens to allow autoplay and stop when closed -->
                 <iframe data-src="https://www.youtube.com/embed/zl4Oi8yQ5ZA?rel=0" width="100%" height="420" frameborder="0" allow="autoplay; encrypted-media; fullscreen" allowfullscreen></iframe>
               </div>
             </div>
@@ -255,7 +254,6 @@
           target.classList.add('visible');
           if(id === 'members-portal'){
             const iframe = target.querySelector('iframe[data-src]');
-            // prefer data-src then add autoplay and mute for autoplay to work
             if(iframe){
               const base = iframe.getAttribute('data-src') || iframe.getAttribute('data-src') === null ? iframe.getAttribute('data-src') : iframe.getAttribute('src');
               const autoplaySrc = (base || iframe.getAttribute('data-src')) + (base && base.indexOf('?') === -1 ? '?' : '&') + 'autoplay=1&mute=1';
