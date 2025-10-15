@@ -1,5 +1,5 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
-html, body { height: 100%; font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif; color: #362b20; background:#fff9f2; overflow-x:hidden; }
+html, body { height: 100%; font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif; color: #362b20; background:#fff9f2; overflow-x:hidden; -webkit-text-size-adjust:100%; -webkit-font-smoothing:antialiased; -webkit-tap-highlight-color: transparent; }
 
 .banner { position:relative; border-bottom: 0; background-color:transparent; padding:0; display:block; width:100vw; margin-left:calc(50% - 50vw); }
 
@@ -78,8 +78,33 @@ html, body { height: 100%; font-family: 'Inter', system-ui, -apple-system, 'Sego
 
 @media (max-width:640px){
   .layout{ grid-template-columns:1fr; }
-  .sidebar{ order:2; display:flex; overflow:auto; padding:8px; }
-  .sidebar nav ul{ flex-direction:row; gap:8px }
+  .sidebar{ order:2; display:flex; overflow:auto; padding:8px; position:relative; }
+  /* keep nav as a horizontal scroller on small screens and prevent items from shrinking
+     which on some iOS Safari versions causes text to wrap into single-letter lines */
+  .sidebar nav ul{ display:flex; flex-direction:row; gap:8px; padding:6px; -webkit-overflow-scrolling: touch; }
+  .sidebar nav ul li{ flex: 0 0 auto; }
+  .nav-btn{ white-space:nowrap; display:inline-block; padding:8px 10px; font-size:13px; min-width:44px; }
+  /* subtle left/right fades to indicate horizontal scrolling on touch devices */
+  .sidebar::before,
+  .sidebar::after{
+    content: "";
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 44px;
+    pointer-events: none;
+    z-index: 3;
+  }
+  /* left fade (matches sidebar background tones) */
+  .sidebar::before{
+    left: 0;
+    background: linear-gradient(90deg, rgba(255,250,240,0.98), rgba(255,250,240,0));
+  }
+  /* right fade */
+  .sidebar::after{
+    right: 0;
+    background: linear-gradient(270deg, rgba(255,250,240,0.98), rgba(255,250,240,0));
+  }
   .content{ order:1; padding:12px }
   .panel{ width:100%; }
   .banner { min-height:220px; }
